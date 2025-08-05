@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国象棋对战平台</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        .chess-bg {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .scale-in {
+            animation: scale-in 0.3s ease-out forwards;
+        }
+        @keyframes scale-in {
+            0% { transform: scale(0.9); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="chess-bg min-h-screen flex items-center justify-center p-4">
+    <div class="container mx-auto max-w-md">
+        <div class="bg-white bg-opacity-90 backdrop-blur-md shadow-2xl rounded-2xl p-8 transform transition-all duration-300 hover:shadow-2xl">
+            <div class="text-center mb-8">
+                <div class="flex justify-center mb-4">
+                    <i class="fas fa-chess-king text-red-600 text-5xl animate-float"></i>
+                    <i class="fas fa-chess-knight text-black text-5xl mx-6 animate-float" style="animation-delay: 0.5s"></i>
+                    <i class="fas fa-chess-queen text-red-600 text-5xl animate-float" style="animation-delay: 1s"></i>
+                </div>
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">
+                    中国象棋对战平台
+                </h1>
+                <p class="text-gray-600">创建或加入房间开始对弈</p>
+            </div>
+            
+            <div class="space-y-6">
+                <button id="createRoom" class="w-full bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300 transform hover:scale-105 flex items-center justify-center shadow-md">
+                    <i class="fas fa-plus-circle mr-2"></i>
+                    创建房间
+                </button>
+                
+                <div class="flex items-center space-x-2">
+                    <input type="text" id="roomCode" class="border-2 border-gray-300 rounded-lg py-3 px-4 flex-1 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm transition-all duration-300 hover:border-blue-400" placeholder="请输入6位房间码" maxlength="6">
+                    <button id="joinRoom" class="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 transform hover:scale-105 shadow-md">
+                        加入
+                    </button>
+                </div>
+            </div>
+            
+            <div id="notification" class="mt-6 p-4 rounded-lg hidden text-center transition-all duration-300"></div>
+            
+            <div class="mt-8 text-center text-sm text-gray-500">
+                <p><i class="fas fa-shield-alt mr-1"></i> 使用Ably实时通信技术 | 无需注册登录</p>
+            </div>
+        </div>
+        
+        <div class="mt-8 text-center text-gray-300 font-mono text-sm opacity-80">
+            <p>青圣出品，必属精品</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.ably.io/lib/ably.min-1.x.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
